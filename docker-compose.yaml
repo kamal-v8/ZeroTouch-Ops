@@ -1,0 +1,91 @@
+services:
+  traefik:
+    image: traefik:v3.3
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - zapty-network
+
+  nginx-edge:
+    image: nginx:alpine
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=Host(`zapty.local`)"
+      - "traefik.http.routers.nginx.entrypoints=web"
+      - "traefik.http.services.nginx.loadbalancer.server.port=80"
+    networks:
+      - zapty-network
+    depends_on:
+      - frontend
+
+  frontend:
+    build: ./frontend
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.frontend.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.frontend.entrypoints=web"
+      - "traefik.http.services.frontend.loadbalancer.server.port=80"
+    networks:
+      - zapty-network
+
+  backend:
+    build: ./backend
+    environment:
+      - DATABASE_URL=postgresql://user:pass@db-primary:5432/zapty
+      - REDIS_URL=redis://redis:6379/0
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.backend.rule=PathPrefix(`/api`)"
+      - "traefik.http.routers.backend.entrypoints=web"
+      - "traefik.http.services.backend.loadbalancer.server.port=8000"
+    networks:
+      - zapty-network
+    depends_on:
+      - db-primary
+      - redis
+
+  db-primary:
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=zapty
+    volumes:
+      - db-primary-data:/var/lib/postgresql/data
+    networks:
+      - zapty-network
+
+  db-replica:
+    image: postgres:17-alpine
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+      - POSTGRES_DB=zapty
+    # In a real setup, you'd configure replication here.
+    # For a prototype, we'll just run another instance.
+    networks:
+      - zapty-network
+    depends_on:
+      - db-primary
+
+  redis:
+    image: redis:7-alpine
+    networks:
+      - zapty-network
+
+networks:
+  zapty-network:
+    driver: bridge
+
+volumes:
+  db-primary-data:
