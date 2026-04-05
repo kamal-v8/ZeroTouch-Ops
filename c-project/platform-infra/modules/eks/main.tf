@@ -9,9 +9,12 @@ resource "aws_eks_cluster" "main" {
     endpoint_public_access  = true
   }
 
-  depends_on = [aws_iam_role_policy_attachment.cluster_policy]
+  depends_on = [
+    aws_iam_role_policy_attachment.cluster_policy
+  ]
 }
 
+# EKS Node Group
 resource "aws_eks_node_group" "main" {
   cluster_name    = aws_eks_cluster.main.name
   node_group_name = "${var.cluster_name}-ng"
@@ -27,5 +30,7 @@ resource "aws_eks_node_group" "main" {
   instance_types = [var.node_type]
   disk_size      = 20
 
-  depends_on = [aws_iam_role_policy_attachment.node_policy]
+  depends_on = [
+    aws_iam_role_policy_attachment.node_policy
+  ]
 }

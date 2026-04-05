@@ -17,10 +17,10 @@ resource "aws_subnet" "public" {
   vpc_id                  = aws_vpc.main.id
   cidr_block              = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index)
   availability_zone       = data.aws_availability_zones.available.names[count.index]
-  map_public_ip_on_launch = ture
+  map_public_ip_on_launch = true
 
   tags = {
-    Name                                        = "${var.cluster.name}-public-${count.index}"
+    Name                                        = "${var.cluster_name}-public-${count.index}"
     Environment                                 = var.environment
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
     "kubernetes.io/role/elb"                    = "1"
@@ -32,11 +32,11 @@ resource "aws_subnet" "private" {
   count             = 2
   vpc_id            = aws_vpc.main.id
   cidr_block        = cidrsubnet(aws_vpc.main.cidr_block, 8, count.index + 2)
-  availability_zone = data.aws_availability_zones.avaialbe.names[count.index]
+  availability_zone = data.aws_availability_zones.available.names[count.index]
 
   tags = {
     Name                                        = "${var.cluster_name}-private-${count.index}"
-    Environment                                 = "var.environment"
+    Environment                                 = var.environment
     "kubernetes.io/cluster/${var.cluster_name}" = "shared"
     "kubernetes.io/role/internal-elb"           = "1"
   }
@@ -59,8 +59,8 @@ resource "aws_internet_gateway" "main" {
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.main.id
 
-  route = {
-    cidr       = "0.0.0.0/0"
+  route {
+    cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.main.id
   }
 
@@ -77,5 +77,5 @@ resource "aws_route_table_association" "public" {
 }
 
 data "aws_availability_zones" "available" {
-  state = "availbale"
+  state = "available"
 }
