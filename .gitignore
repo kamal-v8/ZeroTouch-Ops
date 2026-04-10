@@ -1,5 +1,33 @@
-#Terraform
+cat > .gitignore << 'EOF'
+# Terraform
 .terraform/
-*.tfstate/
-*.tfstate.backup/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
 *.tfvars
+.terraform.lock.hcl
+
+# Helm
+charts/
+*.tgz
+Chart.lock
+
+# Kubernetes
+kubeconfig
+.kube/
+
+# Secrets & Environment
+.env
+*.env
+secrets.yaml
+values-secrets.yaml
+
+# AWS
+.aws/
+credentials
+
+# Misc
+.DS_Store
+*.log
+EOF.gemini/
+gha-creds-*.json
