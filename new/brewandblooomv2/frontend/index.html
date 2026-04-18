@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brew & Bloom | Artisan Coffee</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="home-page">
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="/" class="logo">Brew & Bloom</a>
+        <div class="menu-toggle"><span>&#9776;</span></div>
+        <ul class="nav-links">
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/auth" id="auth-link">Login</a></li>
+        </ul>
+        <div class="nav-icons">
+          <a href="/cart" class="cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Simple Modern Hero -->
+  <section class="hero-simple">
+    <div class="container">
+      <div class="hero-content">
+        <h1>Exceptional Coffee <br>For Every Morning</h1>
+        <p>Ethically sourced, small-batch roasted, and delivered fresh to your doorstep.</p>
+        <div class="hero-actions">
+          <a href="/shop" class="btn">Shop All Coffee</a>
+          <a href="/about" class="btn btn-outline">Our Story</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Featured Products -->
+  <section class="featured-section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Featured Roasts</h2>
+        <p>Our current favorite micro-lot releases.</p>
+      </div>
+      
+      <div class="products-grid" data-limit="4">
+        <!-- Products will be injected here by app.js -->
+        <p class="loading-text">Loading fresh roasts...</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simple Newsletter -->
+  <section class="newsletter-simple">
+    <div class="container">
+      <div class="newsletter-box">
+        <h3>Join the Club</h3>
+        <p>Get brewing tips and 10% off your first order.</p>
+        <form id="subscribe-form" class="simple-form">
+          <input type="email" id="subscribe-email" placeholder="Email Address" required>
+          <button type="submit" class="btn">Join</button>
+        </form>
+        <p id="subscribe-msg" class="msg-success"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Brew & Bloom</h3>
+          <p>Crafting moments of joy, one cup at a time.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="/shop">Shop All</a></li>
+            <li><a href="/about">Our Story</a></li>
+            <li><a href="/auth">My Account</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Help</h3>
+          <ul>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact: brew@email.com</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2026 Brew & Bloom. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

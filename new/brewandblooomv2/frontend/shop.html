@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Coffee Gallery | Brew & Bloom</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="shop-page">
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="/" class="logo">Brew & Bloom</a>
+        <div class="menu-toggle"><span>&#9776;</span></div>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/shop" class="active">Shop</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/auth" id="auth-link">Login</a></li>
+        </ul>
+        <div class="nav-icons">
+          <a href="/cart" class="cart-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+            <span class="cart-count">0</span>
+          </a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="shop-header">
+        <div class="shop-title-area">
+            <span class="eyebrow">Artisan Collection</span>
+            <h1 class="page-title">The Coffee Gallery</h1>
+        </div>
+        <div class="shop-controls">
+            <div class="filter-pills">
+                <button class="filter-pill active" data-category="All">All Roasts</button>
+                <button class="filter-pill" data-category="Light Roast">Light</button>
+                <button class="filter-pill" data-category="Medium Roast">Medium</button>
+                <button class="filter-pill" data-category="Dark Roast">Dark</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="products-grid-wrapper">
+        <div id="shop-products-grid" class="modern-products-grid">
+            <!-- Injected via ui.js -->
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>Brew & Bloom</h3>
+          <p>Crafting moments of joy, one cup at a time.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Shop</h3>
+          <ul>
+            <li><a href="/shop">All Coffee</a></li>
+            <li><a href="/shop">Subscriptions</a></li>
+            <li><a href="/shop">Equipment</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Shipping</a></li>
+            <li><a href="#">Returns</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Stay Connected</h3>
+          <p>Subscribe for updates and offers.</p>
+          <div class="newsletter-mini">
+              <!-- <input type="email" placeholder="Email Address"> -->
+              <!-- <button>&rarr;</button> -->
+          </div>
+        </div>
+      </div>
+      <div class="copyright">
+        &copy; 2026 Brew & Bloom. All rights reserved.
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

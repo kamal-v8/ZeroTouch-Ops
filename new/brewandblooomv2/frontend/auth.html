@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account | Brew & Bloom</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="auth-page-simple">
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav>
+        <a href="/" class="logo">Brew & Bloom</a>
+        <ul class="nav-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="/shop">Shop</a></li>
+          <li><a href="/about">About</a></li>
+          <li><a href="/auth" class="active">Login</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="auth-main">
+    <div class="auth-card-simple">
+      
+      <!-- Login Form -->
+      <div id="login-section" class="auth-content active">
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Enter your details to access your account.</p>
+        
+        <form id="login-form" class="simple-form-layout">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-full">Sign In</button>
+        </form>
+        
+        <div class="auth-footer-text">
+          <p>Don't have an account? <a href="#" id="show-register">Create one</a></p>
+        </div>
+      </div>
+
+      <!-- Register Form -->
+      <div id="register-section" class="auth-content">
+        <h2>Create Account</h2>
+        <p class="subtitle">Join our community of coffee lovers.</p>
+        
+        <form id="register-form" class="simple-form-layout">
+          <div class="form-group">
+            <label for="reg-name">Full Name</label>
+            <input type="text" id="reg-name" class="form-control" placeholder="John Doe" maxlength="20" title="Maximum 20 characters" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-email">Email Address</label>
+            <input type="email" id="reg-email" class="form-control" placeholder="name@example.com" required>
+          </div>
+          <div class="form-group">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" class="form-control" placeholder="••••••••" maxlength="50" title="Maximum 50 characters" required>
+          </div>
+          <button type="submit" class="btn btn-full">Register</button>
+        </form>
+        
+        <div class="auth-footer-text">
+          <p>Already have an account? <a href="#" id="show-login">Login here</a></p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const loginSec = document.getElementById('login-section');
+    const registerSec = document.getElementById('register-section');
+    
+    document.getElementById('show-register').onclick = (e) => {
+      e.preventDefault();
+      loginSec.classList.remove('active');
+      registerSec.classList.add('active');
+    };
+    
+    document.getElementById('show-login').onclick = (e) => {
+      e.preventDefault();
+      registerSec.classList.remove('active');
+      loginSec.classList.add('active');
+    };
+  </script>
+  
+  <script type="module" src="app.js"></script>
+</body>
+</html>
