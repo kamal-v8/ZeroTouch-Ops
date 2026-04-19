@@ -5,7 +5,5 @@ metadata:
   namespace: coffee-app
 data:
   DB_NAME: "coffee-db"
-  DB_HOST: "coffee-service" # db service name
+  DB_HOST: "db-service"
   DB_PORT: "5432"
-
----

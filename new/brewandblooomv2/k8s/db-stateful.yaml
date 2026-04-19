@@ -1,9 +1,8 @@
 apiVersion: apps/v1
-kind: Statefulset
+kind: StatefulSet
 metadata:
   name: coffee-db
   namespace: coffee-app
-
 spec:
   serviceName: "db-service"
   replicas: 1
@@ -14,7 +13,6 @@ spec:
     metadata:
       labels:
         app: coffee-db
-
     spec:
       containers:
         - name: postgres
@@ -25,31 +23,28 @@ spec:
             - name: POSTGRES_USER
               valueFrom:
                 secretKeyRef:
-                  name: coffee-Secrets
+                  name: coffee-secrets
                   key: DB_USER
             - name: POSTGRES_PASSWORD
               valueFrom:
                 secretKeyRef:
-                name: coffee-Secrets
-                key: PASSWORD
+                  name: coffee-secrets
+                  key: DB_PASSWORD
             - name: POSTGRES_DB
               valueFrom:
                 configMapKeyRef:
                   name: coffee-config
                   key: DB_NAME
-
           volumeMounts:
             - name: postgres-storage
               mountPath: /var/lib/postgresql/data
             - name: schema-volume
-              mountPath: /docker-entrypoint-initd.d/schema.sql
+              mountPath: /docker-entrypoint-initdb.d/schema.sql
               subPath: schema.sql
-
-          volumes:
-            - name: postgres-storage
-              persistentVolumeClaim:
-                claimName: postgres-pvc
-
-            - name: schema-volume
-              configMap:
-                name: db-schema-config
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc
+        - name: schema-volume
+          configMap:
+            name: db-schema-config

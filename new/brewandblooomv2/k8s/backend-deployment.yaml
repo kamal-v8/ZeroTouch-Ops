@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-backend
+  namespace: coffee-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: coffee-backend
+  template:
+    metadata:
+      labels:
+        app: coffee-backend
+    spec:
+      containers:
+        - name: backend
+          image: coffee-backend:v1
+          ports:
+            - containerPort: 3000
+          env:
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: coffee-secrets
+                  key: DB_USER
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: coffee-secrets
+                  key: DB_PASSWORD
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: coffee-secrets
+                  key: JWT_SECRET
+            - name: DB_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: coffee-config
+                  key: DB_NAME
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: coffee-config
+                  key: DB_HOST
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: coffee-config
+                  key: DB_PORT

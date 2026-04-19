@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: coffee-frontend
+  namespace: coffee-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: coffee-frontend
+  template:
+    metadata:
+      labels:
+        app: coffee-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: coffee-frontend:v1
+          ports:
+            - containerPort: 80
