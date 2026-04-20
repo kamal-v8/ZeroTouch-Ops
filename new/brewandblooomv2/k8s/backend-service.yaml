@@ -3,11 +3,14 @@ kind: Service
 metadata:
   name: backend-service
   namespace: coffee-app
+  labels:
+    app: coffee-backend # Added: ServiceMonitor needs this label in METADATA, not just selector
 spec:
   selector:
     app: coffee-backend
   ports:
-    - protocol: TCP
+    - name: http
+      protocol: TCP
       port: 3000
       targetPort: 3000
   type: ClusterIP

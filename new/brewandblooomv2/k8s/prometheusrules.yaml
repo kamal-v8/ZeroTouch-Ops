@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: coffee-alerts
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  groups:
+    - name: coffee.rules
+      rules:
+        - alert: BackendDown
+          # If the metric is missing OR if the metric is 0, trigger!
+          expr: absent(up{app="coffee-backend"}) or up{app="coffee-backend"} == 0
+          for: 30s # Shorter time for faster testing
+          labels:
+            severity: critical
+          annotations:
+            summary: "Backend pod is down!!"
+            description: "The coffee-backend service is unreachable."
