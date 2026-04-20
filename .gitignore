@@ -17,6 +17,7 @@ Chart.lock
 kubeconfig
 .kube/
 secrets.yaml
+alertmanager.yaml
 
 # Secrets & Environment
 .env

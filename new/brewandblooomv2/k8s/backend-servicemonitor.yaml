@@ -1,0 +1,18 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: coffee-backend-monitor
+  namespace: monitoring
+  labels:
+    release: kube-prometheus-stack
+spec:
+  selector:
+    matchLabels:
+      app: coffee-backend
+  namespaceSelector:
+    matchNames:
+      - coffee-app
+  endpoints:
+    - port: http
+      path: /metrics
+      interval: 15s

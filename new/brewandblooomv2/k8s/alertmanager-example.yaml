@@ -1,0 +1,17 @@
+global:
+  resolve_timeout: 5m
+receivers:
+  - name: "discord-notifications"
+    slack_configs:
+      - api_url: "webhook-link-from-discord/slack"
+        send_resolved: true
+        # Discord is very picky about these fields in Slack mode:
+        username: "Kubernetes Alert"
+        title: "Alert: {{ .GroupLabels.alertname }}"
+        text: 'Status: {{ .Status | toUpper }}\nSummary: {{ .CommonAnnotations.summary }}'
+route:
+  group_by: ["alertname"]
+  group_wait: 10s
+  group_interval: 1m
+  repeat_interval: 12h
+  receiver: "discord-notifications"
