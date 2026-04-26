@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: broken-service
+spec:
+  selector:
+    app: coffee-backend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000 # <--- FIX MY INDENTATION
+  type: LoadBalancer
+
+
+metadata:
+  labels:
+    env: staging
+    env: staging
+    env: staging
